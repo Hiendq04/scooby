@@ -18,6 +18,7 @@ class AdminAuthenticate
     {
         if (!Auth::check() || Auth::user()->role != 'admin') {
             return redirect()->route('/');
+            // abort(404);
         }
 
         return $next($request);

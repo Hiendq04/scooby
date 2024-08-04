@@ -38,6 +38,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @vite(['resources/js/app.js'])
 
     <style>
@@ -48,6 +50,9 @@
 </head>
 
 <body class="home-pages-2">
+    @php
+        $title = $title ?? '';
+    @endphp
     <header class="header-area style-2">
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <div class="header-logo">

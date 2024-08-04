@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin - {{ $title }}</title>
+    <title>Admin {{ $title ? '- ' . $title : '' }}</title>
     <link rel="icon" href="{{ asset('assets/images/sm-logo.svg') }}" type="image/x-icon"> <!-- Favicon-->
 
     <!-- plugin css file  -->
@@ -60,6 +60,13 @@
 </head>
 
 <body>
+    @php
+        if ($title) {
+            $title = $title;
+        } else {
+            $title = '';
+        }
+    @endphp
     <div id="ebazar-layout" class="theme-blue">
 
         <!-- sidebar -->
@@ -77,9 +84,15 @@
                             href="{{ route('admin.dashboard') }}"><i class="icofont-home fs-5"></i>
                             <span>Dashboard</span></a></li>
                     <li class="collapsed">
-                        <a class="m-link {{ $title == 'Category' ? 'active' : '' }}"
-                            href="{{ route('admin.category.list') }}">
-                            <i class="icofont-chart-flow fs-5"></i> <span>Categories</span></a>
+                        <a class="m-link {{ $title == 'Categories' ? 'active' : '' }}" data-bs-toggle="collapse"
+                            data-bs-target="#menu-category" href="#">
+                            <i class="icofont-chart-flow fs-5"></i> <span>Categories</span> <span
+                                class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                        <!-- Menu: Sub menu ul -->
+                        <ul class="sub-menu collapse" id="menu-category">
+                            <li><a class="ms-link" href="{{ route('admin.category.list') }}">Categories List</a></li>
+                            <li><a class="ms-link" href="{{ route('admin.category.add') }}">Categories Add</a></li>
+                        </ul>
                     </li>
                     <li class="collapsed">
                         <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-product" href="#">
@@ -87,13 +100,8 @@
                                 class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
                         <!-- Menu: Sub menu ul -->
                         <ul class="sub-menu collapse" id="menu-product">
-                            <li><a class="ms-link" href="product-grid.html">Product Grid</a></li>
-                            <li><a class="ms-link" href="product-list.html">Product List</a></li>
-                            <li><a class="ms-link" href="product-edit.html">Product Edit</a></li>
-                            <li><a class="ms-link" href="product-detail.html">Product Details</a></li>
-                            <li><a class="ms-link" href="product-add.html">Product Add</a></li>
-                            <li><a class="ms-link" href="product-cart.html">Shopping Cart</a></li>
-                            <li><a class="ms-link" href="checkout.html">Checkout</a></li>
+                            <li><a class="ms-link" href="{{ route('admin.product.index') }}">Product List</a></li>
+                            <li><a class="ms-link" href="{{ route('admin.product.create') }}">Product Add</a></li>
                         </ul>
                     </li>
                     <li class="collapsed">
@@ -108,13 +116,37 @@
                         </ul>
                     </li>
                     <li class="collapsed">
-                        <a class="m-link {{ $title == 'Accounts' ? 'active' : '' }}"
-                            href="{{ route('admin.account.list') }}">
-                            <i class="icofont-funky-man fs-5"></i> <span>Accounts</span></a>
+                        <a class="m-link {{ $title == 'Accounts' ? 'active' : '' }}" data-bs-toggle="collapse"
+                            data-bs-target="#menu-account" href="#">
+                            <i class="icofont-funky-man fs-5"></i> <span>Accounts</span> <span
+                                class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                        <!-- Menu: Sub menu ul -->
+                        <ul class="sub-menu collapse" id="menu-account">
+                            <li><a class="ms-link" href="{{ route('admin.account.list') }}">Accounts List</a></li>
+                            {{-- <li><a class="ms-link" href="{{route('admin.account.add')}}">Accounts Add</a></li> --}}
+                        </ul>
                     </li>
                     <li class="collapsed">
-                        <a class="m-link {{ $title == 'Voucher' ? 'active' : '' }}" href="{{route('admin.voucher.list')}}">
-                            <i class="icofont-sale-discount fs-5"></i> <span>Voucher</span></a>
+                        <a class="m-link {{ $title == 'Voucher' ? 'active' : '' }}" data-bs-toggle="collapse"
+                            data-bs-target="#menu-voucher" href="#">
+                            <i class="icofont-sale-discount fs-5"></i> <span>Voucher</span> <span
+                                class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                        <!-- Menu: Sub menu ul -->
+                        <ul class="sub-menu collapse" id="menu-voucher">
+                            <li><a class="ms-link" href="{{ route('admin.voucher.list') }}">Voucher List</a></li>
+                            <li><a class="ms-link" href="{{ route('admin.voucher.add') }}">Voucher Add</a></li>
+                        </ul>
+                    </li>
+                    <li class="collapsed">
+                        <a class="m-link {{ $title == 'Banner' ? 'active' : '' }}" data-bs-toggle="collapse"
+                            data-bs-target="#menu-banner" href="#">
+                            <i class="icofont-presentation-alt fs-5"></i> <span>Banner</span> <span
+                                class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                        <!-- Menu: Sub menu ul -->
+                        <ul class="sub-menu collapse" id="menu-banner">
+                            <li><a class="ms-link" href="{{ route('admin.banner.index') }}">Banner List</a></li>
+                            <li><a class="ms-link" href="{{ route('admin.banner.create') }}">Banner Add</a></li>
+                        </ul>
                     </li>
                     <li class="collapsed">
                         <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-inventory" href="#">

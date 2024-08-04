@@ -26,24 +26,37 @@ Route::post('/password/reset', [Auth\ForgotController::class, 'handleReset'])->n
 Route::get('account/info', [Client\AccountController::class, 'getInfoAccount'])->name('api.account.info');
 Route::post('contact', [Client\OtherController::class, 'sendQuestion'])->name('contact.send.question');
 
-Route::prefix('admin')->name('api.admin.')->group(function(){
-    Route::prefix('account')->name('account.')->group(function(){
+Route::name('api.')->group(function () {
+    Route::prefix('cart')->as('cart.')->group(function () {
+        Route::post('add', [Client\CartController::class, 'addToCart'])->name('add');
+        Route::post('get', [Client\CartController::class, 'getCart'])->name('get');
+        Route::post('update', [Client\CartController::class, 'updateCart'])->name('update');
+        Route::post('delete', [Client\CartController::class, 'deleteCart'])->name('delete');
+    });
+    Route::prefix('voucher')->as('voucher.')->group(function () {
+        Route::post('apply', [Client\VoucherController::class, 'apply'])->name('apply');
+    });
+});
+
+Route::prefix('admin')->name('api.admin.')->group(function () {
+    Route::prefix('account')->name('account.')->group(function () {
         Route::get('list', [Admin\AccountController::class, 'getAccounts'])->name('list');
         Route::post('add', [Admin\AccountController::class, 'addAccount'])->name('add');
         Route::post('delete', [Admin\AccountController::class, 'deleteAccount'])->name('delete');
         Route::post('edit', [Admin\AccountController::class, 'editAccount'])->name('edit');
         Route::post('update', [Admin\AccountController::class, 'updateAccount'])->name('update');
     });
-    Route::prefix('category')->name('category.')->group(function(){
+    Route::prefix('category')->name('category.')->group(function () {
         Route::get('list', [Admin\CategoryController::class, 'getCategories'])->name('list');
         Route::post('add', [Admin\CategoryController::class, 'handleAddCategory'])->name('add');
         Route::post('delete', [Admin\CategoryController::class, 'deleteCategory'])->name('delete');
         Route::post('update', [Admin\CategoryController::class, 'updateCategory'])->name('update');
     });
-    Route::prefix('voucher')->name('voucher.')->group(function(){
+    Route::prefix('voucher')->name('voucher.')->group(function () {
         Route::get('list', [Admin\VoucherController::class, 'getVouchers'])->name('list');
         Route::post('add', [Admin\VoucherController::class, 'handleAddVoucher'])->name('add');
         Route::post('delete', [Admin\VoucherController::class, 'deleteVoucher'])->name('delete');
         Route::post('update', [Admin\VoucherController::class, 'updateVoucher'])->name('update');
     });
+    Route::post('banner/status/update', [Admin\BannerController::class, 'updateStatus'])->name('banner.status');
 });

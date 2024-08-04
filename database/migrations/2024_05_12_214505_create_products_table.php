@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('sku');
             $table->text('description');
+            $table->text('image');
             $table->string('price');
+            $table->string('price_sale')->nullable();
             $table->string('quantity');
             $table->string('category_id');
-            $table->string('brand_id');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['published', 'hidden'])->default('published');
             $table->timestamps();
         });
     }

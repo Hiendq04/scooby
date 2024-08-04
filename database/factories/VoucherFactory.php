@@ -12,7 +12,7 @@ class VoucherFactory extends Factory
             'code' => fake()->lexify('??????????'),
             'limit' => '20',
             'value' => '50000',
-            'condition' => '500000',
+            'condition' => '50000',
             'type' => 'free_ship',
             'start_date' => now(),
             'end_date' => now()->addDays(7),

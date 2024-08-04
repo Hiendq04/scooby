@@ -14,28 +14,41 @@
                                 <div class="col-md-6">
                                     <div class="form-inner">
                                         <label>Frist Name</label>
-                                        <input name="first_name" value="{{$account->first_name}}" type="text" placeholder="Frist Name" maxlength="30">
+                                        <input name="first_name" value="{{ $account->first_name }}" type="text"
+                                            placeholder="Frist Name" maxlength="30">
                                         <p class="error err_first_name text-danger"></p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-inner">
                                         <label>Last Name</label>
-                                        <input name="last_name" value="{{$account->last_name}}" type="text" placeholder="Last Name" maxlength="30">
+                                        <input name="last_name" value="{{ $account->last_name }}" type="text"
+                                            placeholder="Last Name" maxlength="30">
                                         <p class="error err_last_name text-danger"></p>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-inner">
                                         <label>Enter Your Email</label>
-                                        <input name="email" value="{{$account->email}}" type="text" placeholder="Enter Your Email" maxlength="155">
+                                        <input name="email" value="{{ $account->email }}" type="text"
+                                            placeholder="Enter Your Email" maxlength="155">
                                         <p class="error err_email text-danger"></p>
                                     </div>
                                 </div>
                             </div>
                             {{-- <button type="submit" id="submitButton" class="account-btn">Create Account</button> --}}
                         </form>
-                        <a href="{{route('admin.dashboard')}}">Admin</a>
+                        @if (Auth::user()->role == 'admin')
+                            <div class="d-flex justify-center">
+                                <a class="btn btn-warning col-5" href="{{ route('admin.dashboard') }}">Admin</a>
+                                <div class="col-2"></div>
+                                <a class="btn btn-danger col-5" href="{{ route('logout') }}"><i
+                                        class="bi bi-box-arrow-right"></i></a>
+                            </div>
+                        @else
+                            <a class="btn btn-danger col-12" href="{{ route('logout') }}"><i
+                                    class="bi bi-box-arrow-right"></i></a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -45,7 +58,7 @@
 
 @section('scripts')
     <script>
-        // let apiUrl = "{{route('api.account.info')}}";
+        // let apiUrl = "{{ route('api.account.info') }}";
 
         // $.ajax({
         //     type: "GET",

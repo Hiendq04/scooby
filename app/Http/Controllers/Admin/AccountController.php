@@ -16,7 +16,7 @@ class AccountController extends Controller
         $title = "Accounts";
         $idUser = auth()->id();
 
-        return view('Admin.account_list', compact('title', 'idUser'));
+        return view('Admin.accounts.account_list', compact('title', 'idUser'));
     }
     public function getAccounts(Request $request)
     {
@@ -75,7 +75,8 @@ class AccountController extends Controller
             return response()->json(['type' => "error", "data" => "Bạn không thể xóa tài khoản của mình!"], 200);
 
         $account = User::find($request->id);
-        if ($request->id == 1 || ($account->role == 'admin' && $request->idUser != 1))
+        $user = User::find($request->idUser);
+        if (($account->first_name == 'admin') || ($account->role == 'admin' && $user->first_name !== 'admin'))
             return response()->json(['type' => "error", "data" => "Bạn không thể xóa người dùng này!"], 200);
 
         $account->delete();
@@ -162,6 +163,6 @@ class AccountController extends Controller
         $account = User::find($request->id);
         $profile = Profile::where('user_id', $request->id)->first();
 
-        return view('Admin.account_detail', compact('title', 'account', 'profile'));
+        return view('Admin.accounts.account_detail', compact('title', 'account', 'profile'));
     }
 }

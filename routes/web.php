@@ -41,25 +41,29 @@ Route::middleware('auth')->group(function () {
     Route::get('check-out', [Client\CheckOutController::class, 'checkOut'])->name('checkout');
     Route::get('faq', [Client\OtherController::class, 'faq'])->name('faq');
     Route::get('gallery', [Client\OtherController::class, 'gallery'])->name('gallery');
-    Route::prefix('account')->name('account.')->group(function(){
+    Route::prefix('account')->name('account.')->group(function () {
         Route::get('info', [Client\AccountController::class, 'info'])->name('info');
     });
+    Route::post('/cart/save', [Client\CartController::class, 'saveCart'])->name('cart.save');
+    Route::post('/place-order', [Client\OrderController::class, 'placeOrder'])->name('place.order');
 });
 
-Route::middleware('admin')->prefix('admin')->name('admin.')->group(function(){
+Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [Admin\HomeController::class, 'index'])->name('dashboard');
-    Route::prefix('account')->name('account.')->group(function(){
+    Route::prefix('account')->name('account.')->group(function () {
         Route::get('list', [Admin\AccountController::class, 'list'])->name('list');
         Route::get('info/{id}', [Admin\AccountController::class, 'showAccount'])->name('info');
     });
-    Route::prefix('category')->name('category.')->group(function(){
+    Route::prefix('category')->name('category.')->group(function () {
         Route::get('list', [Admin\CategoryController::class, 'list'])->name('list');
         Route::get('add', [Admin\CategoryController::class, 'add'])->name('add');
         Route::get('edit/{id}', [Admin\CategoryController::class, 'edit'])->name('edit');
     });
-    Route::prefix('voucher')->name('voucher.')->group(function(){
+    Route::prefix('voucher')->name('voucher.')->group(function () {
         Route::get('list', [Admin\VoucherController::class, 'list'])->name('list');
         Route::get('add', [Admin\VoucherController::class, 'add'])->name('add');
         Route::get('edit/{id}', [Admin\VoucherController::class, 'edit'])->name('edit');
     });
+    Route::resource('product', Admin\ProductController::class);
+    Route::resource('banner', Admin\BannerController::class);
 });

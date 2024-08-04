@@ -12,7 +12,7 @@ class CategoryController extends Controller
     {
         $title = 'Category';
 
-        return view('Admin.category_list', compact('title'));
+        return view('Admin.categories.category_list', compact('title'));
     }
     public function getCategories(Request $request)
     {
@@ -46,7 +46,7 @@ class CategoryController extends Controller
     {
         $title = 'Category';
 
-        return view('Admin.category_add', compact('title'));
+        return view('Admin.categories.category_add', compact('title'));
     }
     public function handleAddCategory(Request $request)
     {
@@ -76,9 +76,9 @@ class CategoryController extends Controller
         $title = "Category";
         $category = Category::find($idCat);
         if(!$category)
-            return redirect()->route('admin.category.list');
+            return redirect()->route('admin.categories.category.list');
 
-        return view('Admin.category_edit', compact('title', 'category'));
+        return view('Admin.categories.category_edit', compact('title', 'category'));
     }
     public function updateCategory(Request $request)
     {

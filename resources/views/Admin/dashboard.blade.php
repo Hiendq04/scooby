@@ -1,6 +1,5 @@
 @extends('Layout.admin')
 @section('styles')
-
 @endsection
 @section('content')
     <div class="main px-lg-4 px-md-4">
@@ -69,12 +68,12 @@
                             <ul class="nav nav-tabs tab-card tab-body-header rounded  d-inline-flex w-sm-100">
                                 <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab"
                                         href="#summery-today">Today</a></li>
-                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
-                                        href="#summery-week">Week</a></li>
+                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#summery-week">Week</a>
+                                </li>
                                 <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
                                         href="#summery-month">Month</a></li>
-                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
-                                        href="#summery-year">Year</a></li>
+                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#summery-year">Year</a>
+                                </li>
                             </ul>
                             <div class="date-filter d-flex align-items-center mt-2 mt-sm-0 w-sm-100">
                                 <div class="input-group">

@@ -13,13 +13,13 @@ class VoucherController extends Controller
     {
         $title = 'Voucher';
 
-        return view('Admin.voucher_list', compact('title'));
+        return view('Admin.vouchers.voucher_list', compact('title'));
     }
     public function add()
     {
         $title = 'Voucher';
 
-        return view('Admin.voucher_add', compact('title'));
+        return view('Admin.vouchers.voucher_add', compact('title'));
     }
     public function edit(Request $request)
     {
@@ -28,7 +28,7 @@ class VoucherController extends Controller
         if(!$voucher)
             return redirect()->route('admin.voucher.list');
 
-        return view('Admin.voucher_edit', compact('title', 'voucher'));
+        return view('Admin.vouchers.voucher_edit', compact('title', 'voucher'));
     }
     public function getVouchers(Request $request)
     {
